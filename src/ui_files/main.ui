@@ -159,12 +159,26 @@
     <property name="geometry">
      <rect>
       <x>260</x>
-      <y>10</y>
-      <width>121</width>
-      <height>601</height>
+      <y>90</y>
+      <width>111</width>
+      <height>441</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="choose_field">
+     <item row="1" column="1">
+      <widget class="QRadioButton" name="choose_8x8">
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QRadioButton" name="choose_5x5">
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
      <item row="1" column="0">
       <widget class="QRadioButton" name="choose_6x6">
        <property name="text">
@@ -182,20 +196,6 @@
          <width>16</width>
          <height>16</height>
         </size>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="1">
-      <widget class="QRadioButton" name="choose_5x5">
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="1">
-      <widget class="QRadioButton" name="choose_8x8">
-       <property name="text">
-        <string/>
        </property>
       </widget>
      </item>
