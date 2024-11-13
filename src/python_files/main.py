@@ -164,19 +164,26 @@ class Main(QMainWindow):
         _translate = QtCore.QCoreApplication.translate
         Main.setWindowTitle(_translate("Main", "Игра 2048:Главное окно"))
         self.text_4x4.setText(_translate(
-            "Main", "<html><head/><body><p><span style=\" font-size:16pt; font-weight:600;\">4 на 4</span></p></body></html>"))
+            "Main", "<html><head/><body><p><span style=\" font-size:16pt; \
+font-weight:600;\">4 на 4</span></p></body></html>"))
         self.text_6x6.setText(_translate(
-            "Main", "<html><head/><body><p><span style=\" font-size:16pt; font-weight:600;\">6 на 6</span></p></body></html>"))
+            "Main", "<html><head/><body><p><span style=\" font-size:16pt; \
+font-weight:600;\">6 на 6</span></p></body></html>"))
         self.text_5x5.setText(_translate(
-            "Main", "<html><head/><body><p><span style=\" font-size:16pt; font-weight:600;\">5 на 5</span></p></body></html>"))
+            "Main", "<html><head/><body><p><span style=\" font-size:16pt; \
+font-weight:600;\">5 на 5</span></p></body></html>"))
         self.text_8x8.setText(_translate(
-            "Main", "<html><head/><body><p><span style=\" font-size:16pt; font-weight:600;\">8 на 8</span></p></body></html>"))
+            "Main", "<html><head/><body><p><span style=\" font-size:16pt; \
+font-weight:600;\">8 на 8</span></p></body></html>"))
         self.text_play.setText(_translate(
-            "Main", "<html><head/><body><p><span style=\" font-size:16pt; font-weight:600;\">Играть</span></p></body></html>"))
+            "Main", "<html><head/><body><p><span style=\" font-size:16pt; \
+font-weight:600;\">Играть</span></p></body></html>"))
         self.text_records.setText(_translate(
-            "Main", "<html><head/><body><p><span style=\" font-size:16pt; font-weight:600;\">Рекорды</span></p></body></html>"))
+            "Main", "<html><head/><body><p><span style=\" font-size:16pt; \
+font-weight:600;\">Рекорды</span></p></body></html>"))
         self.text_exit.setText(_translate(
-            "Main", "<html><head/><body><p><span style=\" font-size:16pt; font-weight:600;\">Выйти</span></p></body></html>"))
+            "Main", "<html><head/><body><p><span style=\" font-size:16pt; \
+font-weight:600;\">Выйти</span></p></body></html>"))
 
     # Открытие других окон
     def open_window_game(self):
