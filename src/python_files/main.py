@@ -28,7 +28,7 @@ class Main(QMainWindow):
         self.title_image.setObjectName("title_image")
 
         self.play_button = QtWidgets.QPushButton(parent=self.centralwidget)
-        self.play_button.setGeometry(QtCore.QRect(160, 550, 101, 91))
+        self.play_button.setGeometry(QtCore.QRect(160, 550, 91, 91))
         self.play_button.setText("")
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap("../../data/pictures/play.png"),
@@ -39,7 +39,7 @@ class Main(QMainWindow):
         self.play_button.clicked.connect(self.open_window_game)
 
         self.records_button = QtWidgets.QPushButton(parent=self.centralwidget)
-        self.records_button.setGeometry(QtCore.QRect(330, 550, 101, 91))
+        self.records_button.setGeometry(QtCore.QRect(340, 550, 91, 91))
         self.records_button.setText("")
         icon1 = QtGui.QIcon()
         icon1.addPixmap(QtGui.QPixmap("../../data/pictures/records.png"),
@@ -123,11 +123,11 @@ class Main(QMainWindow):
         self.text_8x8.setObjectName("text_8x8")
 
         self.text_play = QtWidgets.QLabel(parent=self.centralwidget)
-        self.text_play.setGeometry(QtCore.QRect(190, 640, 51, 31))
+        self.text_play.setGeometry(QtCore.QRect(170, 640, 81, 31))
         self.text_play.setObjectName("text_play")
 
         self.text_records = QtWidgets.QLabel(parent=self.centralwidget)
-        self.text_records.setGeometry(QtCore.QRect(340, 640, 91, 31))
+        self.text_records.setGeometry(QtCore.QRect(340, 640, 111, 31))
         self.text_records.setObjectName("text_records")
 
         Main.setCentralWidget(self.centralwidget)
@@ -155,11 +155,11 @@ class Main(QMainWindow):
         self.text_8x8.setText(_translate(
             "Main", "<html><head/><body><p><span style=\" font-size:16pt; font-weight:600;\">8 на 8</span></p></body></html>"))
         self.text_play.setText(_translate(
-            "Main", "<html><head/><body><p><span style=\" font-size:16pt; font-weight:600;\">Play</span></p></body></html>"))
+            "Main", "<html><head/><body><p><span style=\" font-size:16pt; font-weight:600;\">Играть</span></p></body></html>"))
         self.text_records.setText(_translate(
-            "Main", "<html><head/><body><p><span style=\" font-size:16pt; font-weight:600;\">Records</span></p></body></html>"))
-
+            "Main", "<html><head/><body><p><span style=\" font-size:16pt; font-weight:600;\">Рекорды</span></p></body></html>"))
     # Открытие других окон
+
     def open_window_game(self):
         self.game_window = Game()
         ex.hide()
