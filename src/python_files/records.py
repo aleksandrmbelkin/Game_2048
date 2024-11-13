@@ -1,5 +1,5 @@
-import csv
 import os
+import csv
 from PyQt6 import QtCore, QtWidgets, QtGui
 from PyQt6.QtWidgets import QMainWindow, QApplication, QWidget
 
