@@ -111,7 +111,7 @@ class Main(QMainWindow):
         self.text_4x4.setObjectName("text_4x4")
 
         self.text_5x5 = QtWidgets.QLabel(parent=self.centralwidget)
-        self.text_5x5.setGeometry(QtCore.QRect(400, 280, 71, 41))
+        self.text_5x5.setGeometry(QtCore.QRect(400, 280, 71, 51))
         self.text_5x5.setObjectName("text_5x5")
 
         self.text_6x6 = QtWidgets.QLabel(parent=self.centralwidget)
