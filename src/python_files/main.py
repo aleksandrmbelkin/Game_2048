@@ -15,7 +15,8 @@ class Main(QMainWindow):
     # Итнерфейс из QtDesigner
     def setupUi(self, Main):
         Main.setObjectName("Main")
-        Main.resize(600, 700)
+        Main.setFixedSize(600, 700)
+        Main.setWindowIcon(QtGui.QIcon('../../data/pictures/logo_2048.png'))
         self.centralwidget = QtWidgets.QWidget(parent=Main)
         self.centralwidget.setObjectName("centralwidget")
 
@@ -27,27 +28,27 @@ class Main(QMainWindow):
         self.title_image.setScaledContents(True)
         self.title_image.setObjectName("title_image")
 
-        self.play_button = QtWidgets.QPushButton(parent=self.centralwidget)
-        self.play_button.setGeometry(QtCore.QRect(160, 550, 91, 91))
-        self.play_button.setText("")
+        self.button_play = QtWidgets.QPushButton(parent=self.centralwidget)
+        self.button_play.setGeometry(QtCore.QRect(250, 530, 91, 91))
+        self.button_play.setText("")
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap("../../data/pictures/play.png"),
                        QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
-        self.play_button.setIcon(icon)
-        self.play_button.setIconSize(QtCore.QSize(80, 80))
-        self.play_button.setObjectName("play_button")
-        self.play_button.clicked.connect(self.open_window_game)
+        self.button_play.setIcon(icon)
+        self.button_play.setIconSize(QtCore.QSize(80, 80))
+        self.button_play.setObjectName("button_play")
+        self.button_play.clicked.connect(self.open_window_game)
 
-        self.records_button = QtWidgets.QPushButton(parent=self.centralwidget)
-        self.records_button.setGeometry(QtCore.QRect(340, 550, 91, 91))
-        self.records_button.setText("")
+        self.button_records = QtWidgets.QPushButton(parent=self.centralwidget)
+        self.button_records.setGeometry(QtCore.QRect(430, 530, 91, 91))
+        self.button_records.setText("")
         icon1 = QtGui.QIcon()
         icon1.addPixmap(QtGui.QPixmap("../../data/pictures/records.png"),
                         QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
-        self.records_button.setIcon(icon1)
-        self.records_button.setIconSize(QtCore.QSize(80, 80))
-        self.records_button.setObjectName("records_button")
-        self.records_button.clicked.connect(self.open_window_records)
+        self.button_records.setIcon(icon1)
+        self.button_records.setIconSize(QtCore.QSize(80, 80))
+        self.button_records.setObjectName("button_records")
+        self.button_records.clicked.connect(self.open_window_records)
 
         self.image_4x4 = QtWidgets.QLabel(parent=self.centralwidget)
         self.image_4x4.setGeometry(QtCore.QRect(70, 110, 181, 181))
@@ -78,7 +79,7 @@ class Main(QMainWindow):
         self.image_8x8.setObjectName("image_8x8")
 
         self.gridLayoutWidget = QtWidgets.QWidget(parent=self.centralwidget)
-        self.gridLayoutWidget.setGeometry(QtCore.QRect(260, 10, 121, 601))
+        self.gridLayoutWidget.setGeometry(QtCore.QRect(260, 90, 111, 441))
         self.gridLayoutWidget.setObjectName("gridLayoutWidget")
 
         self.choose_field = QtWidgets.QGridLayout(self.gridLayoutWidget)
@@ -123,12 +124,27 @@ class Main(QMainWindow):
         self.text_8x8.setObjectName("text_8x8")
 
         self.text_play = QtWidgets.QLabel(parent=self.centralwidget)
-        self.text_play.setGeometry(QtCore.QRect(170, 640, 81, 31))
+        self.text_play.setGeometry(QtCore.QRect(260, 620, 81, 31))
         self.text_play.setObjectName("text_play")
 
         self.text_records = QtWidgets.QLabel(parent=self.centralwidget)
-        self.text_records.setGeometry(QtCore.QRect(340, 640, 111, 31))
+        self.text_records.setGeometry(QtCore.QRect(430, 620, 111, 31))
         self.text_records.setObjectName("text_records")
+
+        self.text_exit = QtWidgets.QLabel(parent=self.centralwidget)
+        self.text_exit.setGeometry(QtCore.QRect(100, 620, 71, 31))
+        self.text_exit.setObjectName("text_exit")
+
+        self.button_exit = QtWidgets.QPushButton(parent=self.centralwidget)
+        self.button_exit.setGeometry(QtCore.QRect(90, 530, 91, 91))
+        self.button_exit.setText("")
+        icon2 = QtGui.QIcon()
+        icon2.addPixmap(QtGui.QPixmap("../../data/pictures/exit.png"),
+                        QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        self.button_exit.setIcon(icon2)
+        self.button_exit.setIconSize(QtCore.QSize(80, 80))
+        self.button_exit.setObjectName("button_exit")
+        self.button_exit.clicked.connect(self.close)
 
         Main.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(parent=Main)
@@ -158,15 +174,17 @@ class Main(QMainWindow):
             "Main", "<html><head/><body><p><span style=\" font-size:16pt; font-weight:600;\">Играть</span></p></body></html>"))
         self.text_records.setText(_translate(
             "Main", "<html><head/><body><p><span style=\" font-size:16pt; font-weight:600;\">Рекорды</span></p></body></html>"))
-    # Открытие других окон
+        self.text_exit.setText(_translate(
+            "Main", "<html><head/><body><p><span style=\" font-size:16pt; font-weight:600;\">Выйти</span></p></body></html>"))
 
+    # Открытие других окон
     def open_window_game(self):
         self.game_window = Game()
         ex.hide()
         self.game_window.show()
 
     def open_window_records(self):
-        self.records_window = Records()
+        self.records_window = Records(Main())
         ex.hide()
         self.records_window.show()
 
