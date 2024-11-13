@@ -292,7 +292,7 @@
      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt; font-weight:600;&quot;&gt;Выйти&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
-   <widget class="QLabel" name="button_exit">
+   <widget class="QPushButton" name="button_exit">
     <property name="geometry">
      <rect>
       <x>90</x>
@@ -304,11 +304,15 @@
     <property name="text">
      <string/>
     </property>
-    <property name="pixmap">
-     <pixmap>../../data/pictures/exit.png</pixmap>
+    <property name="icon">
+     <iconset>
+      <normaloff>../../data/pictures/exit.png</normaloff>../../data/pictures/exit.png</iconset>
     </property>
-    <property name="scaledContents">
-     <bool>true</bool>
+    <property name="iconSize">
+     <size>
+      <width>80</width>
+      <height>80</height>
+     </size>
     </property>
    </widget>
   </widget>
