@@ -19,6 +19,38 @@ class Records(QWidget):
         self.title_records.setGeometry(QtCore.QRect(130, 0, 341, 131))
         self.title_records.setObjectName("title_records")
 
+        self.text_records_4x4 = QtWidgets.QLabel(parent=Records)
+        self.text_records_4x4.setGeometry(QtCore.QRect(110, 120, 71, 41))
+        self.text_records_4x4.setObjectName("text_records_4x4")
+
+        self.text_records_5x5 = QtWidgets.QLabel(parent=Records)
+        self.text_records_5x5.setGeometry(QtCore.QRect(410, 120, 71, 41))
+        self.text_records_5x5.setObjectName("text_records_5x5")
+
+        self.text_records_6x6 = QtWidgets.QLabel(parent=Records)
+        self.text_records_6x6.setGeometry(QtCore.QRect(110, 390, 71, 31))
+        self.text_records_6x6.setObjectName("text_records_6x6")
+
+        self.text_records_8x8 = QtWidgets.QLabel(parent=Records)
+        self.text_records_8x8.setGeometry(QtCore.QRect(410, 390, 71, 31))
+        self.text_records_8x8.setObjectName("text_records_8x8")
+
+        self.records_image_1 = QtWidgets.QLabel(parent=Records)
+        self.records_image_1.setGeometry(QtCore.QRect(30, 20, 101, 101))
+        self.records_image_1.setText("")
+        self.records_image_1.setPixmap(
+            QtGui.QPixmap("data/pictures/records.png"))
+        self.records_image_1.setScaledContents(True)
+        self.records_image_1.setObjectName("records_image_1")
+
+        self.records_image_2 = QtWidgets.QLabel(parent=Records)
+        self.records_image_2.setGeometry(QtCore.QRect(470, 20, 101, 101))
+        self.records_image_2.setText("")
+        self.records_image_2.setPixmap(
+            QtGui.QPixmap("data/pictures/records.png"))
+        self.records_image_2.setScaledContents(True)
+        self.records_image_2.setObjectName("records_image_2")
+
         self.records_4x4 = QtWidgets.QListWidget(parent=Records)
         self.records_4x4.setGeometry(QtCore.QRect(10, 160, 271, 181))
         self.records_4x4.setObjectName("records_4x4")
@@ -56,38 +88,6 @@ class Records(QWidget):
         item = QtWidgets.QListWidgetItem()
         item.setTextAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
         self.records_4x4.addItem(item)
-
-        self.text_records_4x4 = QtWidgets.QLabel(parent=Records)
-        self.text_records_4x4.setGeometry(QtCore.QRect(110, 120, 71, 41))
-        self.text_records_4x4.setObjectName("text_records_4x4")
-
-        self.text_records_5x5 = QtWidgets.QLabel(parent=Records)
-        self.text_records_5x5.setGeometry(QtCore.QRect(410, 120, 71, 41))
-        self.text_records_5x5.setObjectName("text_records_5x5")
-
-        self.text_records_6x6 = QtWidgets.QLabel(parent=Records)
-        self.text_records_6x6.setGeometry(QtCore.QRect(110, 390, 71, 31))
-        self.text_records_6x6.setObjectName("text_records_6x6")
-
-        self.text_records_8x8 = QtWidgets.QLabel(parent=Records)
-        self.text_records_8x8.setGeometry(QtCore.QRect(410, 390, 71, 31))
-        self.text_records_8x8.setObjectName("text_records_8x8")
-
-        self.records_image_1 = QtWidgets.QLabel(parent=Records)
-        self.records_image_1.setGeometry(QtCore.QRect(30, 20, 101, 101))
-        self.records_image_1.setText("")
-        self.records_image_1.setPixmap(
-            QtGui.QPixmap("data/pictures/records.png"))
-        self.records_image_1.setScaledContents(True)
-        self.records_image_1.setObjectName("records_image_1")
-
-        self.records_image_2 = QtWidgets.QLabel(parent=Records)
-        self.records_image_2.setGeometry(QtCore.QRect(470, 20, 101, 101))
-        self.records_image_2.setText("")
-        self.records_image_2.setPixmap(
-            QtGui.QPixmap("data/pictures/records.png"))
-        self.records_image_2.setScaledContents(True)
-        self.records_image_2.setObjectName("records_image_2")
 
         self.records_5x5 = QtWidgets.QListWidget(parent=Records)
         self.records_5x5.setGeometry(QtCore.QRect(310, 160, 271, 181))
