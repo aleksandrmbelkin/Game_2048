@@ -78,32 +78,35 @@ class Main(QMainWindow):
         self.image_8x8.setScaledContents(True)
         self.image_8x8.setObjectName("image_8x8")
 
-        self.gridLayoutWidget = QtWidgets.QWidget(parent=self.centralwidget)
-        self.gridLayoutWidget.setGeometry(QtCore.QRect(260, 90, 111, 441))
-        self.gridLayoutWidget.setObjectName("gridLayoutWidget")
-
-        self.choose_field = QtWidgets.QGridLayout(self.gridLayoutWidget)
+        self.main_radio_buttons = QtWidgets.QWidget(parent=self.centralwidget)
+        self.main_radio_buttons.setGeometry(QtCore.QRect(260, 90, 111, 441))
+        self.main_radio_buttons.setObjectName("main_radio_buttons")
+        self.choose_field = QtWidgets.QGridLayout(self.main_radio_buttons)
         self.choose_field.setContentsMargins(0, 0, 0, 0)
         self.choose_field.setObjectName("choose_field")
 
-        self.choose_4x4 = QtWidgets.QRadioButton(parent=self.gridLayoutWidget)
+        self.choose_4x4 = QtWidgets.QRadioButton(
+            parent=self.main_radio_buttons)
         self.choose_4x4.setText("")
         self.choose_4x4.setIconSize(QtCore.QSize(16, 16))
         self.choose_4x4.setObjectName("choose_4x4")
         self.choose_4x4.setChecked(True)
         self.choose_field.addWidget(self.choose_4x4, 0, 0, 1, 1)
 
-        self.choose_5x5 = QtWidgets.QRadioButton(parent=self.gridLayoutWidget)
+        self.choose_5x5 = QtWidgets.QRadioButton(
+            parent=self.main_radio_buttons)
         self.choose_5x5.setText("")
         self.choose_5x5.setObjectName("choose_5x5")
         self.choose_field.addWidget(self.choose_5x5, 0, 1, 1, 1)
 
-        self.choose_6x6 = QtWidgets.QRadioButton(parent=self.gridLayoutWidget)
+        self.choose_6x6 = QtWidgets.QRadioButton(
+            parent=self.main_radio_buttons)
         self.choose_6x6.setText("")
         self.choose_6x6.setObjectName("choose_6x6")
         self.choose_field.addWidget(self.choose_6x6, 1, 0, 1, 1)
 
-        self.choose_8x8 = QtWidgets.QRadioButton(parent=self.gridLayoutWidget)
+        self.choose_8x8 = QtWidgets.QRadioButton(
+            parent=self.main_radio_buttons)
         self.choose_8x8.setText("")
         self.choose_8x8.setObjectName("choose_8x8")
         self.choose_field.addWidget(self.choose_8x8, 1, 1, 1, 1)
@@ -187,7 +190,15 @@ font-weight:600;\">Выйти</span></p></body></html>"))
 
     # Открытие других окон
     def open_window_game(self):
-        self.game_window = Game()
+        if self.choose_4x4.isChecked():
+            choose = 4
+        elif self.choose_5x5.isChecked():
+            choose = 5
+        elif self.choose_6x6.isChecked():
+            choose = 6
+        elif self.choose_8x8.isChecked():
+            choose = 8
+        self.game_window = Game(choose)
         ex.hide()
         self.game_window.show()
 
