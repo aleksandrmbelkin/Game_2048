@@ -191,13 +191,13 @@ font-weight:600;\">Выйти</span></p></body></html>"))
     # Открытие других окон
     def open_window_game(self):
         if self.choose_4x4.isChecked():
-            choose = 4
+            choose = '4x4'
         elif self.choose_5x5.isChecked():
-            choose = 5
+            choose = '5x5'
         elif self.choose_6x6.isChecked():
-            choose = 6
+            choose = '6x6'
         elif self.choose_8x8.isChecked():
-            choose = 8
+            choose = '8x8'
         self.game_window = Game(choose)
         ex.hide()
         self.game_window.show()
