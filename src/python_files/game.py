@@ -15,7 +15,7 @@ class Game(QMainWindow):
     # Итнерфейс из QtDesigner
     def setupUi(self, Game):
         Game.setObjectName("Game")
-        Game.resize(600, 700)
+        Game.setFixedSize(600, 700)
         Game.setWindowIcon(QtGui.QIcon('data/pictures/logo_2048.png'))
 
         self.game_back_button = QtWidgets.QPushButton(parent=Game)
