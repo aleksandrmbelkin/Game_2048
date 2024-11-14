@@ -1,5 +1,6 @@
 import os
 import csv
+
 from PyQt6 import QtCore, QtWidgets, QtGui
 from PyQt6.QtWidgets import QMainWindow, QApplication, QWidget
 
@@ -227,14 +228,7 @@ class Records(QWidget):
         self.title_records.setText(_translate(
             "Records", "<html><head/><body><p align=\"center\"><span style=\" \
 font-size:48pt; font-weight:600; color:#fac437;\">Рекорды</span></p></body></html>"))
-        __sortingEnabled = self.records_4x4.isSortingEnabled()
-        self.records_4x4.setSortingEnabled(False)
-        item = self.records_4x4.item(0)
-        item.setText(_translate("Records", "Пока что здесь пусто :("))
-        item = self.records_4x4.item(1)
-        item.setText(_translate(
-            "Records", "Начните играть, чтобы здесь что-то появилось"))
-        self.records_4x4.setSortingEnabled(__sortingEnabled)
+
         self.text_records_4x4.setText(_translate(
             "Records", "<html><head/><body><p><span style=\" font-size:16pt; \
 font-weight:600;\">4 на 4</span></p></body></html>"))
@@ -247,30 +241,86 @@ font-weight:600;\">6 на 6</span></p></body></html>"))
         self.text_records_8x8.setText(_translate(
             "Records", "<html><head/><body><p><span style=\" font-size:16pt; \
 font-weight:600;\">8 на 8</span></p></body></html>"))
-        __sortingEnabled = self.records_5x5.isSortingEnabled()
-        self.records_5x5.setSortingEnabled(False)
-        item = self.records_5x5.item(0)
-        item.setText(_translate("Records", "Пока что здесь пусто :("))
-        item = self.records_5x5.item(1)
-        item.setText(_translate(
-            "Records", "Начните играть, чтобы здесь что-то появилось"))
-        self.records_5x5.setSortingEnabled(__sortingEnabled)
-        __sortingEnabled = self.records_6x6.isSortingEnabled()
-        self.records_6x6.setSortingEnabled(False)
-        item = self.records_6x6.item(0)
-        item.setText(_translate("Records", "Пока что здесь пусто :("))
-        item = self.records_6x6.item(1)
-        item.setText(_translate(
-            "Records", "Начните играть, чтобы здесь что-то появилось"))
-        self.records_6x6.setSortingEnabled(__sortingEnabled)
-        __sortingEnabled = self.records_8x8.isSortingEnabled()
-        self.records_8x8.setSortingEnabled(False)
-        item = self.records_8x8.item(0)
-        item.setText(_translate("Records", "Пока что здесь пусто :("))
-        item = self.records_8x8.item(1)
-        item.setText(_translate(
-            "Records", "Начните играть, чтобы здесь что-то появилось"))
-        self.records_8x8.setSortingEnabled(__sortingEnabled)
+
+        with open('data/records/4x4.csv', encoding="utf8") as csvfile:
+            __sortingEnabled = self.records_4x4.isSortingEnabled()
+            self.records_4x4.setSortingEnabled(False)
+
+            reader = sorted(sorted([i for i in csv.DictReader(
+                csvfile, delimiter=';', quotechar='"')], key=lambda x: x['user_name']), key=lambda x: (int(x['score'])), reverse=True)
+            if len(reader) > 0:
+                for i in range(len(reader)):
+                    if i > 9:
+                        break
+                    self.records_4x4.item(i).setText(
+                        f"{reader[i]['user_name']} - {reader[i]['score']}")
+
+            else:
+                item = self.records_4x4.item(0)
+                item.setText(_translate("Records", "Пока что здесь пусто :("))
+                item = self.records_4x4.item(1)
+                item.setText(_translate(
+                    "Records", "Начните играть, чтобы здесь что-то появилось"))
+                self.records_4x4.setSortingEnabled(__sortingEnabled)
+
+        with open('data/records/5x5.csv', encoding="utf8") as csvfile:
+            reader = sorted(sorted([i for i in csv.DictReader(
+                csvfile, delimiter=';', quotechar='"')], key=lambda x: x['user_name']), key=lambda x: (int(x['score'])), reverse=True)
+            if len(reader) > 0:
+                for i in range(len(reader)):
+                    if i > 9:
+                        break
+                    self.records_5x5.item(i).setText(
+                        f"{reader[i]['user_name']} - {reader[i]['score']}")
+            else:
+                __sortingEnabled = self.records_5x5.isSortingEnabled()
+                self.records_5x5.setSortingEnabled(False)
+                item = self.records_5x5.item(0)
+                item.setText(_translate("Records", "Пока что здесь пусто :("))
+                item = self.records_5x5.item(1)
+                item.setText(_translate(
+                    "Records", "Начните играть, чтобы здесь что-то появилось"))
+                self.records_5x5.setSortingEnabled(__sortingEnabled)
+
+        with open('data/records/6x6.csv', encoding="utf8") as csvfile:
+            reader = sorted(sorted([i for i in csv.DictReader(
+                csvfile, delimiter=';', quotechar='"')], key=lambda x: x['user_name']), key=lambda x: (int(x['score'])), reverse=True)
+            if len(reader) > 0:
+                for i in range(len(reader)):
+                    if i > 9:
+                        break
+                    self.records_6x6.item(i).setText(
+                        f"{reader[i]['user_name']} - {reader[i]['score']}")
+            else:
+                __sortingEnabled = self.records_6x6.isSortingEnabled()
+                self.records_6x6.setSortingEnabled(False)
+                item = self.records_6x6.item(0)
+                item.setText(_translate("Records", "Пока что здесь пусто :("))
+                item = self.records_6x6.item(1)
+                item.setText(_translate(
+                    "Records", "Начните играть, чтобы здесь что-то появилось"))
+                self.records_6x6.setSortingEnabled(__sortingEnabled)
+
+        with open('data/records/8x8.csv', encoding="utf8") as csvfile:
+            __sortingEnabled = self.records_8x8.isSortingEnabled()
+            self.records_8x8.setSortingEnabled(False)
+
+            reader = sorted(sorted([i for i in csv.DictReader(
+                csvfile, delimiter=';', quotechar='"')], key=lambda x: x['user_name']), key=lambda x: (int(x['score'])), reverse=True)
+            if len(reader) > 0:
+                for i in range(len(reader)):
+                    if i > 9:
+                        break
+                    self.records_8x8.item(i).setText(
+                        f"{reader[i]['user_name']} - {reader[i]['score']}")
+            else:
+                item = self.records_8x8.item(0)
+                item.setText(_translate("Records", "Пока что здесь пусто :("))
+                item = self.records_8x8.item(1)
+                item.setText(_translate(
+                    "Records", "Начните играть, чтобы здесь что-то появилось"))
+                self.records_8x8.setSortingEnabled(__sortingEnabled)
+
         self.records_back_text.setText(_translate(
             "Records", "<html><head/><body><p><span style=\" \
 font-size:28pt; font-weight:600; color:#896b62;\">Назад</span></p></body></html>"))
