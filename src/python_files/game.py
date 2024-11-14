@@ -1,6 +1,7 @@
 import os
 import csv
 import random
+
 from PyQt6 import QtCore, QtWidgets, QtGui
 from PyQt6.QtWidgets import QMainWindow, QApplication
 
@@ -8,9 +9,14 @@ from PyQt6.QtWidgets import QMainWindow, QApplication
 class Game(QMainWindow):
     def __init__(self, choose):
         super().__init__()
-        self.setupUi(self)
+        # Обозначение переменных
         self.choose = choose
-        self.start(self.choose)
+        self.move_back_flag = False
+
+        # Функции старта
+        self.setupUi(self)
+        self.restart_hide()
+        self.start()
 
     # Итнерфейс из QtDesigner
     def setupUi(self, Game):
@@ -42,6 +48,7 @@ class Game(QMainWindow):
         self.game_restart_button.setIcon(icon1)
         self.game_restart_button.setIconSize(QtCore.QSize(60, 60))
         self.game_restart_button.setObjectName("game_restart_button")
+        self.game_restart_button.clicked.connect(self.restart_show)
 
         self.game_restart_text = QtWidgets.QLabel(parent=Game)
         self.game_restart_text.setGeometry(QtCore.QRect(470, 650, 111, 61))
@@ -60,6 +67,7 @@ class Game(QMainWindow):
         self.game_move_back_button.setIcon(icon2)
         self.game_move_back_button.setIconSize(QtCore.QSize(60, 60))
         self.game_move_back_button.setObjectName("game_move_back_button")
+        self.game_move_back_button.clicked.connect(self.move_back)
 
         self.game_record_text = QtWidgets.QLabel(parent=Game)
         self.game_record_text.setGeometry(QtCore.QRect(140, 10, 101, 61))
@@ -69,6 +77,13 @@ class Game(QMainWindow):
         self.game_record_line_edit.setGeometry(QtCore.QRect(252, 29, 301, 31))
         self.game_record_line_edit.setObjectName("game_record_line_edit")
         self.game_record_line_edit.setReadOnly(True)
+        with open(f'data/records/{self.choose}.csv', encoding="utf8") as csvfile:
+            reader = sorted([i for i in csv.DictReader(
+                csvfile, delimiter=';', quotechar='"')], key=lambda x: int(x['score']), reverse=True)
+            if len(reader) > 0:
+                self.game_record_line_edit.setText(reader[0]['score'])
+            else:
+                self.game_record_line_edit.setText('Это ваша первая игра')
 
         self.game_score_text = QtWidgets.QLabel(parent=Game)
         self.game_score_text.setGeometry(QtCore.QRect(170, 60, 71, 61))
@@ -88,6 +103,7 @@ class Game(QMainWindow):
         self.game_up_button.setIcon(icon3)
         self.game_up_button.setIconSize(QtCore.QSize(40, 40))
         self.game_up_button.setObjectName("game_up_button")
+        self.game_up_button.clicked.connect(self.move_up)
 
         self.game_right_button = QtWidgets.QPushButton(parent=Game)
         self.game_right_button.setGeometry(QtCore.QRect(340, 620, 61, 61))
@@ -98,6 +114,7 @@ class Game(QMainWindow):
         self.game_right_button.setIcon(icon4)
         self.game_right_button.setIconSize(QtCore.QSize(60, 60))
         self.game_right_button.setObjectName("game_right_button")
+        self.game_right_button.clicked.connect(self.move_right)
 
         self.game_left_button = QtWidgets.QPushButton(parent=Game)
         self.game_left_button.setGeometry(QtCore.QRect(200, 620, 61, 61))
@@ -108,6 +125,7 @@ class Game(QMainWindow):
         self.game_left_button.setIcon(icon5)
         self.game_left_button.setIconSize(QtCore.QSize(60, 60))
         self.game_left_button.setObjectName("game_left_button")
+        self.game_left_button.clicked.connect(self.move_left)
 
         self.game_down_button = QtWidgets.QPushButton(parent=Game)
         self.game_down_button.setGeometry(QtCore.QRect(270, 650, 61, 31))
@@ -118,6 +136,29 @@ class Game(QMainWindow):
         self.game_down_button.setIcon(icon6)
         self.game_down_button.setIconSize(QtCore.QSize(40, 40))
         self.game_down_button.setObjectName("game_down_button")
+        self.game_down_button.clicked.connect(self.move_down)
+
+        self.game_yes_button = QtWidgets.QPushButton(parent=Game)
+        self.game_yes_button.setGeometry(QtCore.QRect(410, 630, 31, 31))
+        self.game_yes_button.setText("")
+        icon7 = QtGui.QIcon()
+        icon7.addPixmap(QtGui.QPixmap("data/pictures/yes.png"),
+                        QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        self.game_yes_button.setIcon(icon7)
+        self.game_yes_button.setIconSize(QtCore.QSize(30, 30))
+        self.game_yes_button.setObjectName("game_yes_button")
+        self.game_yes_button.clicked.connect(self.start)
+
+        self.game_no_button = QtWidgets.QPushButton(parent=Game)
+        self.game_no_button.setGeometry(QtCore.QRect(450, 630, 31, 31))
+        self.game_no_button.setText("")
+        icon8 = QtGui.QIcon()
+        icon8.addPixmap(QtGui.QPixmap("data/pictures/no.png"),
+                        QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        self.game_no_button.setIcon(icon8)
+        self.game_no_button.setIconSize(QtCore.QSize(30, 30))
+        self.game_no_button.setObjectName("game_no_button")
+        self.game_no_button.clicked.connect(self.restart_hide)
 
         self.gridLayoutWidget = QtWidgets.QWidget(parent=Game)
         self.gridLayoutWidget.setGeometry(QtCore.QRect(50, 130, 501, 481))
@@ -147,7 +188,6 @@ font-size:18pt; font-weight:600; color:#896b62;\">Рекорд:</span></p></body
         self.game_score_text.setText(_translate(
             "Game", "<html><head/><body><p><span style=\" \
 font-size:18pt; font-weight:600; color:#896b62;\">Счёт:</span></p></body></html>"))
-        self.game_record_line_edit.setText(_translate("Game", "0"))
         self.game_score_line_edit.setText(_translate("Game", "0"))
 
     # Открытие окна main
@@ -155,5 +195,39 @@ font-size:18pt; font-weight:600; color:#896b62;\">Счёт:</span></p></body></h
         Game.close(self)
         os.system(r'python src/python_files/main.py')
 
-    def start(self, choose):
-        print(choose)
+    # Запуск игры
+    def start(self):
+        self.restart_hide()
+        print(self.choose)
+
+    # Работа с перезапуском
+    def restart_hide(self):
+        self.game_yes_button.hide()
+        self.game_no_button.hide()
+
+    def restart_show(self):
+        self.game_yes_button.show()
+        self.game_no_button.show()
+
+    # Шаг назад
+    def move_back(self):
+        if self.move_back_flag:
+            print('Шаг назад')
+            self.move_back_flag = False
+
+    # Перемещение
+    def move_up(self):
+        self.move_back_flag = True
+        print('Вверх')
+
+    def move_down(self):
+        self.move_back_flag = True
+        print('Вниз')
+
+    def move_left(self):
+        self.move_back_flag = True
+        print('Влево')
+
+    def move_right(self):
+        self.move_back_flag = True
+        print('Вправо')
