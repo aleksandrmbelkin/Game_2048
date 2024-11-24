@@ -329,7 +329,6 @@ class Game(QWidget):
                 font-size:18pt; font-weight:600; color:#896b62;\">Счёт:</span></p></body></html>"))
         self.game_score_line_edit.setText(
             self._translate("Game", str(self.score)))
-        self.test.setText(self._translate("Game", "test"))
         self.game_end.setText(self._translate(
             "Game", "<html><head/><body><p><span style=\" \
                 font-size:36pt; font-weight:600; color:#896b62;\">Игра окончена</span></p></body></html>"))
