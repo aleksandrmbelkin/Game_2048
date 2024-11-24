@@ -306,12 +306,6 @@ class Game(QWidget):
         self.game_win_image_4.setScaledContents(True)
         self.game_win_image_4.setObjectName("game_win_image_4")
 
-        # Тест!!!
-        self.test = QtWidgets.QPushButton(parent=Game)
-        self.test.setGeometry(QtCore.QRect(550, 360, 41, 23))
-        self.test.setObjectName("test")
-        self.test.clicked.connect(self.end_game)
-
         # Подключение retranslateUi
         self.retranslateUi(Game)
         QtCore.QMetaObject.connectSlotsByName(Game)
