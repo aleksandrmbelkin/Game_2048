@@ -18,20 +18,11 @@ class Game(QWidget):
         self._translate = QtCore.QCoreApplication.translate
         self.matrix_copy = []
 
-        # Сохраненные очки и флаг шага назад
-        with open(f'data/saves/variables/var_{self.choose}', 'r', encoding="utf8") as f:
-            variables = f.read()
-            if variables == '':
-                self.score = 0
-                self.last_score = 0
-                self.was_win = False
-                self.move_back_flag = False
-            else:
-                variables_lines = variables.split('\n')
-                self.score = int(variables_lines[0])
-                self.last_score = int(variables_lines[1])
-                self.was_win = bool(int(variables_lines[2]))
-                self.move_back_flag = bool(int(variables_lines[3]))
+        # Переменные
+        self.score = 0
+        self.last_score = 0
+        self.was_win = False
+        self.move_back_flag = False
 
         # Функции старта
         self.setupUi(self)
@@ -372,7 +363,29 @@ class Game(QWidget):
 
     # Запуск игры
     def start(self):
-        self.score = 0
+        with open(f'data/saves/variables/var_{self.choose}', 'r', encoding="utf8") as f:
+            variables = f.read()
+            if variables == '':
+                self.score = 0
+                self.last_score = 0
+                self.was_win = False
+                self.move_back_flag = False
+            else:
+                variables_lines = variables.split('\n')
+                self.score = int(variables_lines[0])
+                self.last_score = int(variables_lines[1])
+                self.was_win = bool(int(variables_lines[2]))
+                self.move_back_flag = bool(int(variables_lines[3]))
+
+        with open(f'data/records/rec_{self.choose}.csv', encoding="utf8") as csvfile:
+            self.reader = sorted([i for i in csv.DictReader(
+                csvfile, delimiter=';', quotechar='"')], key=lambda x: int(x['score']), reverse=True)
+            if len(self.reader) > 0:
+                self.record = int(self.reader[0]['score'])
+                self.game_record_line_edit.setText(str(self.record))
+            else:
+                self.game_record_line_edit.setText('Это ваша первая игра')
+
         self.game_score_line_edit.setText(
             self._translate("Game", str(self.score)))
 
@@ -385,8 +398,11 @@ class Game(QWidget):
                     f.write('')
                 self.game_field_matrix = [
                     ['None'] * self.side_length for _ in range(self.side_length)]
+                self.game_field_matrix_last = [
+                    ['None'] * self.side_length for _ in range(self.side_length)]
                 self.generate_random_cell()
                 self.generate_random_cell()
+                self.move_back_flag = False
             else:
                 self.game_field_matrix = []
                 locations_lines = locations.split('\n')
@@ -691,7 +707,7 @@ class Game(QWidget):
             f_now.write('')
         with open(f'data/saves/locations/loc_last_{self.choose}', 'w', encoding="utf8") as f_last:
             f_last.write('')
-        with open(f'data/saves/variables/loc_now_{self.choose}', 'w', encoding="utf8") as f:
+        with open(f'data/saves/variables/var_{self.choose}', 'w', encoding="utf8") as f:
             f.write('')
 
     def end_hide(self):
